@@ -101,13 +101,12 @@ app.delete('/getBookedServicesData/:id', async (req, res) => {
     const { id } = req.params;
     const deletedService = await BookServices.findByIdAndDelete(id);
 
-    if (!deletedService) {
+    if (!deletedService) { 
       return res.status(404).json({ error: 'Service request not found' });
     }
 
     res.status(204).end(); // No content, successful deletion
-  } catch (error) {
-    console.error('Error deleting service:', error);
+  } catch (error) {    
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
@@ -171,7 +170,6 @@ app.put('/getBookedServicesData/:id', async (req, res) => {
 
     res.json(updatedService);
   } catch (error) {
-    console.error('Error updating service:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
@@ -183,30 +181,6 @@ const loginSchema = new mongoose.Schema({
 
 const LoginModel = mongoose.model('login', loginSchema, 'adminlogin');
 
-// Login endpoint
-// app.post('/api/login', async (req, res) => {
-//   try {
-//     const { email, password } = req.body;
-
-//     // Find user by email
-//     const user = await LoginModel.findOne({ email });
-
-//     if (!user) {
-//       return res.status(401).json({ error: 'Invalid email or password' });
-//     }
-
-//     // Check password
-//     if (user.password !== password) {
-//       return res.status(401).json({ error: 'Invalid email or password' });
-//     }
-
-//     // Authentication successful
-//     res.json({ message: 'Login successful', user });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: 'Internal Server Error' });
-//   }
-// });
 
 app.post('/api/login', async (req, res) => {
   try {
@@ -271,11 +245,6 @@ app.post('/api/users', async (req, res) => {
   try {
     const { Username, Usertype, MobileNumber, EmailAddress, Password } = req.body;
 
-    // Validate request body
-    // if (!Name || !Usertype || !MobileNumber || !EmailAddress || !Password) {
-    //   return res.status(400).json({ error: 'All fields are required' });
-    // }
-
     // Create a new user instance
     const newUser = new User({
       Username,
@@ -290,7 +259,6 @@ app.post('/api/users', async (req, res) => {
 
     res.status(201).json(savedUser);
   } catch (error) {
-    console.error("Error saving user:", error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });

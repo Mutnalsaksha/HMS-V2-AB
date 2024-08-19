@@ -16,7 +16,6 @@ app.use('/favicon.ico', (req, res, next) => {
 });
 
 
-
 const connectToDB = async () => {
   try {
     await mongoose.connect('mongodb+srv://saksha:1234@cluster0.xnvkwgq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
@@ -92,9 +91,6 @@ app.get('/getBookedServicesData', async (req, res) => {
   }
 });
 
-
-
-//Updated Here
 // Add the DELETE endpoint to delete a booked service by ID
 app.delete('/getBookedServicesData/:id', async (req, res) => {
   try {
@@ -110,8 +106,6 @@ app.delete('/getBookedServicesData/:id', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
-
 
 // POST endpoint to add data to BookServices
 app.post('/add-service', async (req, res) => {
@@ -150,7 +144,6 @@ app.post('/add-service', async (req, res) => {
 
     res.status(201).json(savedService);
   } catch (error) {
-    console.error('Error adding service:', error); // Log the error to the console for debugging
     res.status(500).json({ message: 'An error occurred while adding the service', error: error.message });
   }
 });
@@ -208,7 +201,6 @@ app.post('/api/login', async (req, res) => {
 
     res.json({ message: 'Login successful', user, userType });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
@@ -224,7 +216,6 @@ app.get('/api/service', async (req, res) => {
     const data = await ServiceModel.find();
     res.json(data);
   } catch (error) {
-    console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
@@ -291,7 +282,6 @@ app.put('/api/users/:id', async (req, res) => {
 
     res.json(updatedUser);
   } catch (error) {
-    console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
